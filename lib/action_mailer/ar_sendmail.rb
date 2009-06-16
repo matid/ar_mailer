@@ -448,8 +448,7 @@ end
 
     smtp.start(*settings) do |session|
       @failed_auth_count = 0
-      until emails.empty? do
-        email = emails.shift
+      emails.each do |email|
         begin
           res = session.send_message email.mail, email.from, email.to
           email.destroy
